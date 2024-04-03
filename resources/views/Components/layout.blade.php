@@ -6,8 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    @include('Components.nav') <!-- Include the navbar.blade.php file -->
-    
+    <nav>
+        <x-nav href="/home">Home</x-nav>
+        <x-nav href="/about" style="color: green">About</x-nav>
+        <x-nav href="/contact">Contact</x-nav>
+    </nav>
     <!-- slot -->
     {{ $slot}}
 </body>
