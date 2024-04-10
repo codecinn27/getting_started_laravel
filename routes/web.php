@@ -1,6 +1,8 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
+use App\Models\Job;
 
 Route::get('/', function () {
     return view('welcome');
@@ -12,50 +14,22 @@ Route::get('/home', function () {
 
 Route::get('/jobs', function () {
     return view('jobs', [
-        'jobs' =>[
-            [   
-                'id' => 1,
-                'title' => 'Web Developer',
-                'salary' => '30k'
-            ],
-            [
-                'id' => 2,
-                'title' => 'Web Designer',
-                'salary' => '25k'
-            ],
-            [
-                'id' => 3,
-                'title' => 'Project Manager',
-                'salary' => '40k'
-            ]
-        ]
+        'jobs' => Job::all()
     ]);
 });
 
-Route::get('/jobs/{id}', function ($id) {
-    $jobs = [
-        [   
-            'id' => 1,
-            'title' => 'Web Developer',
-            'salary' => '30k'
-        ],
-        [
-            'id' => 2,
-            'title' => 'Web Designer',
-            'salary' => '25k'
-        ],
-        [
-            'id' => 3,
-            'title' => 'Project Manager',
-            'salary' => '40k'
-        ]
-        ];
-    $job = Arr::first($jobs, fn($value) => $value['id'] == $id);
-    //dd($job); // die and dump use to check the variable is it successfully pass or not
+Route::get('/jobs/{id}', function ($id)  {
+    $job = Job::find($id); //3.
+    //2. $job = Arr::first(Job::all(), fn($value) => $value['id'] == $id);
+    //1. dd($job); // die and dump use to check the variable is it successfully pass or not
 
     return view('job', ['job' => $job]);
 });
 
 Route::get('/contact', function () {
     return view('contact');
+});
+
+Route::get('/test', function(){
+    return view('test', ['boo' => true]);//pass it as an associative array
 });
