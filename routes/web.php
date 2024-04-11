@@ -6,6 +6,9 @@ use App\Models\Job;
 
 Route::get('/', function () {
     return view('welcome');
+
+    // $job = Job::all();
+    // dd($job[0]->title);
 });
 
 Route::get('/home', function () {

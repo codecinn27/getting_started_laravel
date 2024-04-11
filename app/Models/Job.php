@@ -2,37 +2,12 @@
 
 namespace App\Models;
 use Illuminate\Support\Arr;   // declare this to use the Arr class, for best practice, is ok to not declare this
+use Illuminate\Database\Eloquent\Model; //to use the Model class must declare
 
-class Job{
-    public static function all():array //return type array
-    {
-        return [
-            [   
-                'id' => 1,
-                'title' => 'Web Developer',
-                'salary' => '30k'
-            ],
-            [
-                'id' => 2,
-                'title' => 'Web Designer',
-                'salary' => '25k'
-            ],
-            [
-                'id' => 3,
-                'title' => 'Project Manager',
-                'salary' => '40k'
-            ]
-        ];
-    }
+class Job extends Model{
+    protected $table = 'job_listings';//assign this data from this table into this class
 
-    public static function find($id):array //return type array
-    {
-        $job = Arr::first(self::all(), fn($value) => $value['id'] == $id);
+    protected $fillable = ['title', 'salary'];//this is to prevent mass assignment, only this field can be assigned
 
-        if(!$job){
-            abort(404);
-        }else{
-            return $job;
-        }
-    }
+    
 }
