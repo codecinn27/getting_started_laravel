@@ -11,5 +11,7 @@ class Job extends Model{
 
     protected $fillable = ['title', 'salary'];//this is to prevent mass assignment, only this field can be assigned
 
-    
+    public function employer(){
+        return $this->belongsTo(Employer::class);
+    }
 }
